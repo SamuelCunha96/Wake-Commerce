@@ -1,5 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Wake.Commerce.Business;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using Wake.Commerce.Business.Features.Produtos.Commands.CriarProduto;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -9,6 +10,13 @@ namespace Wake.Commerce.Api.Controllers
     [ApiController]
     public class ProdutosController : ControllerBase
     {
+        private readonly IMediator _mediator;
+
+        public ProdutosController(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
+
         // GET: api/<ProdutosController>
         [HttpGet]
         public IEnumerable<string> Get()
@@ -25,8 +33,11 @@ namespace Wake.Commerce.Api.Controllers
 
         // POST api/<ProdutosController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> PostAsync([FromBody] CriarProdutoCommand request)
         {
+            var retorno = await _mediator.Send(request);
+
+            return Ok(retorno);
         }
 
         // PUT api/<ProdutosController>/5

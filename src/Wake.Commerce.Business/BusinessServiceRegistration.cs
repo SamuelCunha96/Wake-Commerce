@@ -1,11 +1,12 @@
-﻿using Wake.Commerce.Shared.Behaviours;
-using FluentValidation;
+﻿using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Wake.Commerce.Repository;
-using Wake.Commerce.Shared;
 using Wake.Commerce.Business.DataServices;
+using AutoMapper;
+using Wake.Commerce.Business.AutoMapper;
+using Wake.Commerce.Business.Behaviours;
 
 namespace Wake.Commerce.Business
 {
@@ -19,9 +20,9 @@ namespace Wake.Commerce.Business
 
             RegisterDataServices(services);
 
-            services.AddRepositoryServices(configuration);
+            RegisterMappers(services);
 
-            services.AddSharedServices();
+            services.AddRepositoryServices(configuration);
 
             return services;
         }
@@ -40,5 +41,11 @@ namespace Wake.Commerce.Business
 
         private static void RegisterValidators(IServiceCollection services)
             => services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies().Where(p => !p.IsDynamic));
+
+        private static void RegisterMappers(IServiceCollection services)
+        {
+            var mappingConfig = new MapperConfiguration(mc => { mc.AddProfile(new EntityToDto()); });
+            services.AddSingleton(mappingConfig.CreateMapper());
+        }
     }
 }
