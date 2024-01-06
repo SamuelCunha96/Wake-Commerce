@@ -12,7 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Wake.Commerce.Shared\Wake.Commerce.Shared.csproj" />
-    <ProjectReference Include="..\Wake.Commerce.Business\Wake.Commerce.Business.csproj" />
+    <ProjectReference Include="..\Wake.Commerce.Application\Wake.Commerce.Application.csproj" />
   </ItemGroup>
 
 </Project>

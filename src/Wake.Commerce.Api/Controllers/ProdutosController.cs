@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Wake.Commerce.Business.Features.Produtos.Commands.CriarProduto;
+using Wake.Commerce.Application.Features.Produtos.Commands.CriarProduto;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
