@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Net;
 using System.Text;
-using Wake.Commerce.Business.Features.Produtos.Commands.CriarProduto;
+using Wake.Commerce.Application.Features.Produtos.Commands.CriarProduto;
 using Wake.Commerce.IntegrationTests.Factory;
 
 namespace Wake.Commerce.IntegrationTests.Controllers

@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Wake.Commerce.Repository.Context;
+using Wake.Commerce.Infrastructure.Context;
 
 namespace Wake.Commerce.IntegrationTests.Factory
 {

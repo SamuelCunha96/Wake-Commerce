@@ -1,5 +1,5 @@
-using Wake.Commerce.Business;
-using Wake.Commerce.Business.DataServices;
+using Wake.Commerce.Application;
+using Wake.Commerce.Application.DataServices;
 using Wake.Commerce.Shared.Middleware;
 
 public class Program 
@@ -10,7 +10,7 @@ public class Program
 
         // Add services to the container.
 
-        builder.Services.AddBusinessServices(builder.Configuration);
+        builder.Services.AddApplicationServices(builder.Configuration);
         builder.Services.AddControllers();
 
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
