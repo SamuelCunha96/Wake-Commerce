@@ -1,6 +1,4 @@
 ﻿using Moq;
-using System.Drawing;
-using Wake.Commerce.Application.Features.Produtos.Commands.CriarProduto;
 using Wake.Commerce.Application.Features.Produtos.Commands.EditarProduto;
 using Wake.Commerce.Domain.Entities;
 using Wake.Commerce.Infrastructure.Interfaces.Repositories;
