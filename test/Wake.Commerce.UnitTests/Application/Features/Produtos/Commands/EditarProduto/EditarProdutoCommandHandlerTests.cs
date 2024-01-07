@@ -21,7 +21,7 @@ namespace Wake.Commerce.UnitTests.Application.Features.Produtos.Commands.EditarP
         }
 
         [Fact]
-        public async Task Handle_DeveEditarProduto_QuandoComandoEhValido()
+        public async Task Handle_DeveEditarProduto_QuandoProdutoExiste()
         {
             // Arrange
             var command = new EditarProdutoCommand { Id = 1, Nome = "Nome Atualizado", Estoque = 0, Valor = 50m };
