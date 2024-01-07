@@ -22,11 +22,6 @@ namespace Wake.Commerce.Infrastructure.Repositories.Base
             return EntitySet.AsQueryable();
         }
 
-        public async Task<IReadOnlyList<T>> GetAllAsync()
-        {
-            return await EntitySet.AsQueryable().ToListAsync();
-        }
-
         public async Task<T?> GetByIdAsync(object? id)
             => await EntitySet.FindAsync(id);
 
@@ -47,6 +42,12 @@ namespace Wake.Commerce.Infrastructure.Repositories.Base
         public async Task UpdateAsync(T entidade)
         {
             Context.Entry(entidade).State = EntityState.Modified;
+            await Context.SaveChangesAsync();
+        }
+
+        public async Task DeleteAsync(T entidade)
+        {
+            Context.Entry(entidade).State = EntityState.Deleted;
             await Context.SaveChangesAsync();
         }
     }
