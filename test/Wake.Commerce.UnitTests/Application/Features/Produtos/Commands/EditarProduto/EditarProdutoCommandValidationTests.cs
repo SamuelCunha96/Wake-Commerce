@@ -1,4 +1,6 @@
 ﻿using Moq;
+using System.Drawing;
+using Wake.Commerce.Application.Features.Produtos.Commands.CriarProduto;
 using Wake.Commerce.Application.Features.Produtos.Commands.EditarProduto;
 using Wake.Commerce.Domain.Entities;
 using Wake.Commerce.Infrastructure.Interfaces.Repositories;
@@ -86,6 +88,22 @@ namespace Wake.Commerce.UnitTests.Application.Features.Produtos.Commands.EditarP
             Assert.False(result.IsValid);
             Assert.Contains(result.Errors, e => e.PropertyName == "Id");
             Assert.Single(result.Errors);
+        }
+
+        [Fact]
+        public void ValidaEditarProduto_DeveNaoPossuirErros_QuandoDadosValidos()
+        {
+            // Arrange
+            var command = new EditarProdutoCommand { Id = 1, Nome = "Nome", Estoque = 100, Valor = 100 };
+            var produto = new Produto { Id = 1, Nome = "Produto", Estoque = 100, Valor = 100 };
+            _mockRepository.Setup(m => m.GetQuery()).Returns(new List<Produto> { produto }.AsQueryable());
+
+            // Act
+            var result = _validator.Validate(command);
+
+            // Assert
+            Assert.True(result.IsValid);
+            Assert.Empty(result.Errors);
         }
     }
 
