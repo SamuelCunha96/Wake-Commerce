@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Wake.Commerce.Application.Features.Produtos.Commands.CriarProduto;
+using Wake.Commerce.Application.Features.Produtos.Commands.EditarProduto;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -40,10 +41,13 @@ namespace Wake.Commerce.Api.Controllers
             return Ok(retorno);
         }
 
-        // PUT api/<ProdutosController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        // PUT api/<ProdutosController>
+        [HttpPut()]
+        public async Task<IActionResult> Put([FromBody] EditarProdutoCommand request)
         {
+            await _mediator.Send(request);
+
+            return NoContent();
         }
 
         // DELETE api/<ProdutosController>/5

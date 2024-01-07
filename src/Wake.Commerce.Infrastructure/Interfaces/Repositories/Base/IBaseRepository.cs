@@ -6,7 +6,9 @@ namespace Wake.Commerce.Infrastructure.Interfaces.Repositories.Base
     {
         IQueryable<T> GetQuery();
         Task<IReadOnlyList<T>> GetAllAsync();
+        Task<T?> GetByIdAsync(object? id);
         Task AddAsync(List<T> entity);
         Task AddAsync(T entity);
+        Task UpdateAsync(T entidade);
     }
 }
