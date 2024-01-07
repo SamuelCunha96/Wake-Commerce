@@ -29,7 +29,7 @@ namespace Wake.Commerce.UnitTests.Application.Features.Produtos.Commands.EditarP
             var produtoAtualizado = new Produto { Id = 1, Nome = "Nome Atualizado", Estoque = 10, Valor = 50m };
             _mockRepository.Setup(r => r.GetByIdAsync(It.IsAny<int>())).ReturnsAsync(produto);
             _mockRepository.Setup(r => r.UpdateAsync(It.IsAny<Produto>())).Returns(Task.CompletedTask);
-            _mockMapper.Setup(m => m.Map<Produto>(It.IsAny<EditarProdutoCommand>())).Returns(produtoAtualizado);
+            _mockMapper.Setup(m => m.Map(It.IsAny<EditarProdutoCommand>(), It.IsAny<Produto>())).Returns(produtoAtualizado);
 
             // Act
             var result = await _handler.Handle(command, new CancellationToken());

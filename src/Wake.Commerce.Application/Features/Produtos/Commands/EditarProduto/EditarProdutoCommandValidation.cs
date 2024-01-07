@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using Microsoft.EntityFrameworkCore;
 using Wake.Commerce.Infrastructure.Interfaces.Repositories;
 
 namespace Wake.Commerce.Application.Features.Produtos.Commands.EditarProduto
@@ -32,7 +33,7 @@ namespace Wake.Commerce.Application.Features.Produtos.Commands.EditarProduto
 
         private bool ProdutoExiste(int produtoId) 
         {
-            return _produtoRepository.GetQuery().Any(x => x.Id == produtoId);
+            return _produtoRepository.GetQuery().AsNoTracking().Any(x => x.Id == produtoId);
         }
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Wake.Commerce.Domain.Entities;
 using Wake.Commerce.Infrastructure.Context;
 
 namespace Wake.Commerce.IntegrationTests.Factory
@@ -30,8 +31,16 @@ namespace Wake.Commerce.IntegrationTests.Factory
                     var scopedServices = scope.ServiceProvider;
                     var db = scopedServices.GetRequiredService<WakeCommerceContext>();
                     db.Database.EnsureCreated();
+
+                    SeedFakeDatabase(db);
                 }
             });
+        }
+
+        private void SeedFakeDatabase(WakeCommerceContext context)
+        {
+            context?.Produtos?.AddRangeAsync(new Produto { Nome = "Produto", Estoque = 1, Valor = 10 });
+            context?.SaveChanges();
         }
     }
 }
