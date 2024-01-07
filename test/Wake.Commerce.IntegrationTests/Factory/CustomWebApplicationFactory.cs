@@ -39,7 +39,9 @@ namespace Wake.Commerce.IntegrationTests.Factory
 
         private void SeedFakeDatabase(WakeCommerceContext context)
         {
-            context?.Produtos?.AddRangeAsync(new Produto { Nome = "Produto", Estoque = 1, Valor = 10 });
+            context?.Produtos?.AddRangeAsync(
+                new Produto { Nome = "Produto A", Estoque = 1, Valor = 10 },
+                new Produto { Nome = "Produto B", Estoque = 1, Valor = 10 });
             context?.SaveChanges();
         }
     }
