@@ -25,9 +25,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Wake.Commerce.Business\Wake.Commerce.Business.csproj" />
+    <ProjectReference Include="..\..\src\Wake.Commerce.Application\Wake.Commerce.Application.csproj" />
     <ProjectReference Include="..\..\src\Wake.Commerce.Domain\Wake.Commerce.Domain.csproj" />
-    <ProjectReference Include="..\..\src\Wake.Commerce.Repository\Wake.Commerce.Repository.csproj" />
+    <ProjectReference Include="..\..\src\Wake.Commerce.Infrastructure\Wake.Commerce.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

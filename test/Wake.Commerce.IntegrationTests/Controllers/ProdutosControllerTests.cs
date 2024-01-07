@@ -1,7 +1,9 @@
 ﻿using Newtonsoft.Json;
 using System.Net;
 using System.Text;
-using Wake.Commerce.Business.Features.Produtos.Commands.CriarProduto;
+using Wake.Commerce.Application.Features.Produtos.Commands.CriarProduto;
+using Wake.Commerce.Application.Features.Produtos.Commands.EditarProduto;
+using Wake.Commerce.Application.Features.Produtos.Commands.ExcluirProduto;
 using Wake.Commerce.IntegrationTests.Factory;
 
 namespace Wake.Commerce.IntegrationTests.Controllers
@@ -24,6 +26,7 @@ namespace Wake.Commerce.IntegrationTests.Controllers
             var response = await _client.PostAsync("/api/Produtos", content);
 
             response.EnsureSuccessStatusCode();
+            
             var responseString = await response.Content.ReadAsStringAsync();
             var responseData = JsonConvert.DeserializeObject<CriarProdutoCommandVm>(responseString);
 
@@ -51,6 +54,63 @@ namespace Wake.Commerce.IntegrationTests.Controllers
             var response = await _client.PostAsync("/api/Produtos", content);
 
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+        }
+
+        [Fact]
+        public async Task PutProduto_QuandoProdutoExiste_DeveRetornarNoContentEProdutoSerEditado()
+        {
+            var requestData = new EditarProdutoCommand { Id = 1,  Nome = "Produto alterado", Valor = 555m, Estoque = 55 };
+            var content = new StringContent(JsonConvert.SerializeObject(requestData), Encoding.UTF8, "application/json");
+
+            var response = await _client.PutAsync("/api/Produtos", content);
+
+            response.EnsureSuccessStatusCode();
+
+            Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
+        }
+
+        [Fact]
+        public async Task PutProduto_QuandoValorInvalido_DeveRetornarBadRequest()
+        {
+            var requestData = new EditarProdutoCommand { Id = 1, Nome = "Produto F", Valor = -1, Estoque = 100 };
+            var content = new StringContent(JsonConvert.SerializeObject(requestData), Encoding.UTF8, "application/json");
+
+            var response = await _client.PutAsync("/api/Produtos", content);
+
+            Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+        }
+
+        [Fact]
+        public async Task PutProduto_QuandoEstoqueInvalido_DeveRetornarBadRequest()
+        {
+            var requestData = new EditarProdutoCommand { Id = 1, Nome = "Produto F", Valor = 10m, Estoque = -1 };
+            var content = new StringContent(JsonConvert.SerializeObject(requestData), Encoding.UTF8, "application/json");
+
+            var response = await _client.PutAsync("/api/Produtos", content);
+
+            Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+        }
+
+        [Fact]
+        public async Task DeleteProduto_QuandoProdutoNaoExiste_DeveRetornarBadRequest()
+        {
+            var requestData = new ExcluirProdutoCommand(0);
+
+            var response = await _client.DeleteAsync($"/api/Produtos/{requestData.ProdutoId}");
+
+            Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+        }
+
+        [Fact]
+        public async Task DeleteProduto_QuandoProdutoExiste_DeveRetornarNoContentEProdutoSerExcluido()
+        {
+            var requestData = new ExcluirProdutoCommand(2);
+
+            var response = await _client.DeleteAsync($"/api/Produtos/{requestData.ProdutoId}");
+
+            response.EnsureSuccessStatusCode();
+
+            Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
         }
     }
 }
