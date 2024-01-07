@@ -31,5 +31,21 @@ namespace Wake.Commerce.UnitTests.Application.Features.Produtos.Commands.Excluir
             Assert.Contains(result.Errors, e => e.PropertyName == "ProdutoId");
             Assert.Single(result.Errors);
         }
+
+        [Fact]
+        public void ValidaEditarProduto_DeveNaoPossuirErros_QuandoDadosValidos()
+        {
+            // Arrange
+            var command = new ExcluirProdutoCommand(1);
+            var produto = new Produto { Id = 1, Nome = "Produto", Estoque = 100, Valor = 100 };
+            _mockRepository.Setup(m => m.GetQuery()).Returns(new List<Produto> { produto }.AsQueryable());
+
+            // Act
+            var result = _validator.Validate(command);
+
+            // Assert
+            Assert.True(result.IsValid);
+            Assert.Empty(result.Errors);
+        }
     }
 }
