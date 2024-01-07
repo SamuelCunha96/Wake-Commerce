@@ -57,6 +57,20 @@ namespace Wake.Commerce.UnitTests.Application.Features.Produtos.Commands.CriarPr
             Assert.False(result.IsValid);
             Assert.Contains(result.Errors, e => e.PropertyName == "Valor");
         }
+
+        [Fact]
+        public void ValidaCriarProduto_DeveNaoPossuirErros_QuandoDadosValidos()
+        {
+            // Arrange
+            var command = new CriarProdutoCommand { Nome = "Nome", Estoque = 100, Valor = 100 };
+
+            // Act
+            var result = _validator.Validate(command);
+
+            // Assert
+            Assert.True(result.IsValid);
+            Assert.Empty(result.Errors);
+        }
     }
 
 }
