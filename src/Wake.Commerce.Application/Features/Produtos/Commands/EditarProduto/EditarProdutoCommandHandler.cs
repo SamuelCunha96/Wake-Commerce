@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Wake.Commerce.Domain.Entities;
 using Wake.Commerce.Infrastructure.Interfaces.Repositories;
 
 namespace Wake.Commerce.Application.Features.Produtos.Commands.EditarProduto
@@ -20,7 +21,7 @@ namespace Wake.Commerce.Application.Features.Produtos.Commands.EditarProduto
         {
             var produto = await _produtoRepository.GetByIdAsync(request.Id);
 
-            _mapper.Map(request, produto);
+            produto = _mapper.Map<Produto>(request);
 
             if (produto != null)
                 await _produtoRepository.UpdateAsync(produto);

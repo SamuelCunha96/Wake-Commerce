@@ -15,7 +15,7 @@ namespace Wake.Commerce.UnitTests.Application.Features.Produtos.Commands.CriarPr
         [InlineData("")]
         [InlineData(null)]
         [InlineData("Esta é uma string muito longa que certamente tem mais de cinquenta caracteres para testar a validação.")]
-        public void Validate_DeveFalhar_QuandoNomeEhInvalido(string nomeInvalido)
+        public void ValidaCriarProduto_DeveFalhar_QuandoNomeEhInvalido(string nomeInvalido)
         {
             // Arrange
             var command = new CriarProdutoCommand { Nome = nomeInvalido, Estoque = 10, Valor = 100m };
@@ -30,7 +30,7 @@ namespace Wake.Commerce.UnitTests.Application.Features.Produtos.Commands.CriarPr
 
         [Theory]
         [InlineData(-1)]
-        public void Validate_DeveFalhar_QuandoEstoqueEhInvalido(short estoque)
+        public void ValidaCriarProduto_DeveFalhar_QuandoEstoqueEhInvalido(short estoque)
         {
             // Arrange
             var command = new CriarProdutoCommand { Nome = "Nome", Estoque = estoque, Valor = 100m };
@@ -45,7 +45,7 @@ namespace Wake.Commerce.UnitTests.Application.Features.Produtos.Commands.CriarPr
 
         [Theory]
         [InlineData(-1)]
-        public void Validate_DeveFalhar_QuandoValorProdutoEhInvalido(decimal valor)
+        public void ValidaCriarProduto_DeveFalhar_QuandoValorProdutoEhInvalido(decimal valor)
         {
             // Arrange
             var command = new CriarProdutoCommand { Nome = "Nome", Estoque = 100, Valor = valor };
