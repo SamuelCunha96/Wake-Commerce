@@ -8,10 +8,10 @@ namespace Wake.Commerce.Application.Features.Produtos.Queries.ListarProdutos
         public ListarProdutosQuery(string? nome, TipoOrdenacaoProduto? tipoOrdenacao)
         {
             Nome = nome;
-            TipoOrdenacao = tipoOrdenacao ?? TipoOrdenacaoProduto.Nome;
+            TipoOrdenacao = tipoOrdenacao;
         }
 
         public string? Nome { get; private set; }
-        public TipoOrdenacaoProduto TipoOrdenacao { get; private set; }
+        public TipoOrdenacaoProduto? TipoOrdenacao { get; private set; }
     }
 }

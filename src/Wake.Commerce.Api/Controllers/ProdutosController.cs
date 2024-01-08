@@ -28,7 +28,7 @@ namespace Wake.Commerce.Api.Controllers
         /// <param name="tipoOrdenacao">Ordenar por: [0= Nome]; [1=Valor]; [3=Estoque]</param>
         /// <returns>fdsfsd</returns>
         [HttpGet]
-        public async Task<IActionResult> GetAsync([FromQuery] string? nome, TipoOrdenacaoProduto tipoOrdenacao)
+        public async Task<IActionResult> GetAsync([FromQuery] string? nome, TipoOrdenacaoProduto? tipoOrdenacao)
         {
             var retorno = await _mediator.Send(new ListarProdutosQuery(nome, tipoOrdenacao));
             
