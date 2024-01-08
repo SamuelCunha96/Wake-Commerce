@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using MediatR;
+﻿using MediatR;
 using Moq;
 using Wake.Commerce.Application.Features.Produtos.Commands.ExcluirProduto;
 using Wake.Commerce.Domain.Entities;
@@ -10,14 +9,12 @@ namespace Wake.Commerce.UnitTests.Application.Features.Produtos.Commands.Excluir
     public class ExcluirProdutoCommandHandlerTests
     {
         private readonly Mock<IProdutoRepository> _mockRepository;
-        private readonly Mock<IMapper> _mockMapper;
         private readonly ExcluirProdutoCommandHandler _handler;
 
         public ExcluirProdutoCommandHandlerTests()
         {
             _mockRepository = new Mock<IProdutoRepository>();
-            _mockMapper = new Mock<IMapper>();
-            _handler = new ExcluirProdutoCommandHandler(_mockRepository.Object, _mockMapper.Object);
+            _handler = new ExcluirProdutoCommandHandler(_mockRepository.Object);
         }
 
         [Fact]

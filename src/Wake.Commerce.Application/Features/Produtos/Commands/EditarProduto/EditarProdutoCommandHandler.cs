@@ -22,8 +22,7 @@ namespace Wake.Commerce.Application.Features.Produtos.Commands.EditarProduto
 
             _mapper.Map(request, produto);
 
-            if (produto != null)
-                await _produtoRepository.UpdateAsync(produto);
+            await _produtoRepository.UpdateAsync(produto);
             
             return Unit.Value;
         }

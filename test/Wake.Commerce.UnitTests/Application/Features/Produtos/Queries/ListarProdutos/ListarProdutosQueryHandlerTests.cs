@@ -5,7 +5,7 @@ using Wake.Commerce.Domain.Entities;
 using Wake.Commerce.Infrastructure.Interfaces.Repositories;
 using Wake.Commerce.Shared.Enums;
 
-namespace Wake.Commerce.UnitTests.Application.Features.Produtos.Queries
+namespace Wake.Commerce.UnitTests.Application.Features.Produtos.Queries.ListarProdutos
 {
     public class ListarProdutosQueryHandlerTests
     {
