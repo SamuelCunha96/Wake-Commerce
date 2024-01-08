@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Wake.Commerce.Application.Features.Produtos.Commands.CriarProduto;
 using Wake.Commerce.Application.Features.Produtos.Commands.EditarProduto;
 using Wake.Commerce.Application.Features.Produtos.Commands.ExcluirProduto;
+using Wake.Commerce.Application.Features.Produtos.Queries.BuscarProdutoPorId;
 using Wake.Commerce.Application.Features.Produtos.Queries.ListarProdutos;
 using Wake.Commerce.Shared.Enums;
 
@@ -35,12 +36,18 @@ namespace Wake.Commerce.Api.Controllers
             return Ok(retorno);
         }
 
-        //// GET api/<ProdutosController>/5
-        //[HttpGet("{id}")]
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
+        /// <summary>
+        /// Buscar produto por ID
+        /// </summary>
+        /// <param name="produtoId"></param>
+        /// <returns></returns>
+        [HttpGet("{produtoId}")]
+        public async Task<IActionResult> GetAsync(int produtoId)
+        {
+            var retorno = await _mediator.Send(new BuscarProdutoPorIdQuery(produtoId));
+
+            return Ok(retorno);
+        }
 
         /// <summary>
         /// Criar produto
