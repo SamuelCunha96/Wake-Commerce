@@ -4,6 +4,7 @@ using System.Text;
 using Wake.Commerce.Application.Features.Produtos.Commands.CriarProduto;
 using Wake.Commerce.Application.Features.Produtos.Commands.EditarProduto;
 using Wake.Commerce.Application.Features.Produtos.Commands.ExcluirProduto;
+using Wake.Commerce.Application.Features.Produtos.Queries.BuscarProdutoPorId;
 using Wake.Commerce.Application.Features.Produtos.Queries.ListarProdutos;
 using Wake.Commerce.IntegrationTests.Factory;
 
@@ -126,6 +127,20 @@ namespace Wake.Commerce.IntegrationTests.Controllers
 
             Assert.NotNull(responseData);
             Assert.NotEmpty(responseData);
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        }
+
+        [Fact]
+        public async Task GetProdutoPorId_RetornaProdutoComStatusOk()
+        {
+            var response = await _client.GetAsync($"/api/Produtos/{1}");
+
+            response.EnsureSuccessStatusCode();
+
+            var responseString = await response.Content.ReadAsStringAsync();
+            var responseData = JsonConvert.DeserializeObject<BuscarProdutoPorIdQueryVm>(responseString);
+
+            Assert.NotNull(responseData);
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
     }
