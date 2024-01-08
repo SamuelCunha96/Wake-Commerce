@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Wake.Commerce.Application.Features.Produtos.Commands.CriarProduto;
 using Wake.Commerce.Application.Features.Produtos.Commands.EditarProduto;
+using Wake.Commerce.Application.Features.Produtos.Queries.ListarProdutos;
 using Wake.Commerce.Domain.Entities;
 
 namespace Wake.Commerce.Application.AutoMapper
@@ -11,6 +12,7 @@ namespace Wake.Commerce.Application.AutoMapper
         {
             CreateMap<CriarProdutoCommand, Produto>();
             CreateMap<EditarProdutoCommand, Produto>();
+            CreateMap<Produto, ListarProdutosQueryVm>();
         }
     }
 }

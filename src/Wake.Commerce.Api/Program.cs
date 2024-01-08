@@ -1,3 +1,4 @@
+using System.Reflection;
 using Wake.Commerce.Application;
 using Wake.Commerce.Application.DataServices;
 using Wake.Commerce.Shared.Middleware;
@@ -16,7 +17,12 @@ public class Program
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
 
-        builder.Services.AddSwaggerGen();
+        builder.Services.AddSwaggerGen(options => 
+        {
+            var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+            var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+            options.IncludeXmlComments(xmlPath);
+        });
 
         //services cors
         builder.Services.AddCors(p => p.AddPolicy("CorsConfig", builder =>
